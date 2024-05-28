@@ -8,6 +8,41 @@ on:
   pull_request:
 
 jobs:
+  # define job to build and publish docker image
+  build-and-push-docker-image:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
+  
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.USER_DOCKERHUB }} -p ${{ secrets.PASSWORD_DOCKERHUB }}
+      
+  
+      - name: Build image and push backend
+        uses: docker/build-push-action@v3
+        with:
+          context: backend
+          tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-simple-api:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build image and push database
+        uses: docker/build-push-action@v3
+        with:
+          context: database
+          tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-db:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+  
+      - name: Build image and push httpd
+        uses: docker/build-push-action@v3
+        with:
+          context: httpd
+          tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-httpd:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+  
   test-backend: 
     runs-on: ubuntu-22.04
     steps:
@@ -24,3 +59,5 @@ jobs:
       # Build and test your app with Maven
       - name: Build and test with Maven
         run: mvn clean install --file ./API/simple-api-student-main/pom.xml
+
+        
