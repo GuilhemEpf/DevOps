@@ -25,21 +25,21 @@ jobs:
       - name: Build image and push backend
         uses: docker/build-push-action@v3
         with:
-          context: .\API\simple-api-student-main\
+          context: ./API/simple-api-student-main
           tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
         with:
-          context: .\db\
+          context: ./db
           tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-db:latest
           push: ${{ github.ref == 'refs/heads/main' }}
   
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
         with:
-          context: .\Frontend http\
+          context: ./Frontend http
           tags:  ${{secrets.USER_DOCKERHUB}}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
   
