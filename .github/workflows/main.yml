@@ -23,4 +23,4 @@ jobs:
 
       # Build and test your app with Maven
       - name: Build and test with Maven
-        run: mvn clean install --file API\simple-api-student-main\pom.xml
+        run: mvn clean install --file .\API\simple-api-student-main\pom.xml
