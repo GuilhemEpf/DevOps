@@ -1,0 +1,23 @@
+---
+# tasks file for roles/docker
+# Install Docker
+- name: pull proxy
+  docker_image:
+    name: guilhemperon/tp-devops-httpd
+    tag: latest
+    source: pull
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Run proxy
+  docker_container:
+    name: httpd
+    image: guilhemperon/tp-devops-httpd
+
+    ports:
+      - "80:80"
+    networks:
+      - name: app-network
+    
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

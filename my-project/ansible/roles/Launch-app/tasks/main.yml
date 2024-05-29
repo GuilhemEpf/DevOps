@@ -1,0 +1,22 @@
+- name: pull API image
+  docker_image:
+    name: guilhemperon/tp-devops-simple-api 
+    tag: latest
+    source: pull
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+
+
+- name: Run APP
+  docker_container:
+    name: backend
+    image: guilhemperon/tp-devops-simple-api
+    state: started
+    networks:
+      - name: app-network
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  

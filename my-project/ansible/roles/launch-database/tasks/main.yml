@@ -1,0 +1,17 @@
+- name: pull db image
+  docker_image:
+    name: guilhemperon/tp-devops-db   
+    tag: latest
+    source: pull
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Run DB
+  docker_container:
+    name: database
+    image:  guilhemperon/tp-devops-db
+    state: started
+    networks:
+      - name: app-network
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
