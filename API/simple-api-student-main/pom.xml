@@ -7,6 +7,7 @@
 		<version>2.7.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	<!-- lookup parent from repository -->
 	<groupId>fr.takima.training</groupId>
 	<artifactId>simple-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
