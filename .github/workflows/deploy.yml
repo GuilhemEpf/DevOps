@@ -28,4 +28,4 @@ jobs:
 
       - name: Deploy to production server
         run: |
-          ansible-playbook -i inventories/setup.yml playbook.yml
+          ansible-playbook -i inventories/setup.yml my-project/ansible/playbook.yml
