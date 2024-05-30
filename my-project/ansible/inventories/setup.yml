@@ -1,7 +1,7 @@
 all:
  vars:
    ansible_user: centos
-   ansible_ssh_private_key_file: ${{ secrets.SSH_PRIVATE_KEY }}
+   ansible_ssh_private_key_file: /home/gperon/DevOps-1/my-project/ansible/inventories/ssh-privatekey
 
  children:
    prod:
